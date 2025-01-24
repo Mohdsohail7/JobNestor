@@ -1,0 +1,26 @@
+{
+  "name": "jobnestor",
+  "version": "1.0.0",
+  "description": "Job Application Tracker is a web-based application that facilitates users to track and manage their job applications efficiently. The main purpose of this project is to enable users to easily organize their applied jobs, application status, and interview dates and manage their career in a structured way.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mohdsohail7/JobNestor.git"
+  },
+  "author": "Mohd Sohail",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mohdsohail7/JobNestor/issues"
+  },
+  "homepage": "https://github.com/Mohdsohail7/JobNestor#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "sequelize": "^6.37.5",
+    "sqlite3": "^5.1.7"
+  }
+}
