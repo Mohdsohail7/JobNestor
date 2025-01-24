@@ -25,6 +25,8 @@ const getAllApplicationRouteByCompanyName = require("./routes/fetchApplication")
 const getApplicationByStatusRoute = require("./routes/fetchApplication");
 const getApplicationByAppliedAt = require("./routes/fetchApplication");
 const getApplicationByIdRoute = require("./routes/fetchApplication");
+const updateJobApplicationRoute = require("./routes/createApplication");
+const deleteApplicationRoute = require("./routes/createApplication");
 
 // route
 app.use("/v1/api", createApplicationroute);
@@ -33,6 +35,10 @@ app.use("/v1/api", getAllApplicationRouteByCompanyName);
 app.use("/v1/api", getApplicationByStatusRoute);
 app.use("/v1/api", getApplicationByAppliedAt);
 app.use("/v1/api", getApplicationByIdRoute);
+app.use("/v1/api", updateJobApplicationRoute);
+app.use("/v1/api", deleteApplicationRoute);
+
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
