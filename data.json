@@ -1,0 +1,176 @@
+{
+  "applications": [
+    {
+      "role": "Frontend Developer",
+      "company": "Innovatech",
+      "jdUrl": "https://innovatech.com/careers/frontend",
+      "appliedAt": "2024-01-15",
+      "status": "no reply",
+      "interviewRounds": 0
+    },
+    {
+      "role": "Backend Engineer",
+      "company": "CodeWorks",
+      "jdUrl": "https://codeworks.com/jobs/backend",
+      "appliedAt": "2024-01-20",
+      "status": "no reply",
+      "interviewRounds": 1
+    },
+    {
+      "role": "Full Stack Developer",
+      "company": "DevSolutions",
+      "jdUrl": "https://devsolutions.com/jobs/fullstack",
+      "appliedAt": "2024-01-25",
+      "status": "interview",
+      "interviewRounds": 1
+    },
+    {
+      "role": "Data Analyst",
+      "company": "DataDive",
+      "jdUrl": "https://datadive.com/jobs/analyst",
+      "appliedAt": "2024-02-05",
+      "status": "no reply",
+      "interviewRounds": 0
+    },
+    {
+      "role": "Machine Learning Engineer",
+      "company": "AI Innovations",
+      "jdUrl": "https://aiinnovations.com/careers/ml",
+      "appliedAt": "2024-02-10",
+      "status": "rejected",
+      "interviewRounds": 2
+    },
+    {
+      "role": "Product Manager",
+      "company": "VisionaryTech",
+      "jdUrl": "https://visionarytech.com/careers/productmanager",
+      "appliedAt": "2024-01-28",
+      "status": "selected",
+      "interviewRounds": 3
+    },
+    {
+      "role": "DevOps Engineer",
+      "company": "CloudFlow",
+      "jdUrl": "https://cloudflow.com/jobs/devops",
+      "appliedAt": "2024-01-18",
+      "status": "interview",
+      "interviewRounds": 1
+    },
+    {
+      "role": "Cybersecurity Specialist",
+      "company": "SecureNet",
+      "jdUrl": "https://securenet.com/careers/cybersecurity",
+      "appliedAt": "2024-02-03",
+      "status": "no reply",
+      "interviewRounds": 0
+    },
+    {
+      "role": "UI/UX Designer",
+      "company": "CreativePixels",
+      "jdUrl": "https://creativepixels.com/jobs/uiux",
+      "appliedAt": "2024-02-08",
+      "status": "accepted",
+      "interviewRounds": 2
+    },
+    {
+      "role": "Technical Writer",
+      "company": "DocuCraft",
+      "jdUrl": "https://docucraft.com/jobs/technicalwriter",
+      "appliedAt": "2024-01-30",
+      "status": "rejected",
+      "interviewRounds": 1
+    }
+  ],
+  "interviews": [
+    {
+      "roundNum": 1,
+      "roundType": "telephonic",
+      "interviewDate": "2024-02-10",
+      "questions": "What is your experience with React?",
+      "roleOffered": null,
+      "compensationOffered": null,
+      "applicationId": 1
+    },
+    {
+      "roundNum": 2,
+      "roundType": "live coding",
+      "interviewDate": "2024-02-15",
+      "questions": "Solve a React problem live",
+      "roleOffered": null,
+      "compensationOffered": null,
+      "applicationId": 2
+    },
+    {
+      "roundNum": 1,
+      "roundType": "technical",
+      "interviewDate": "2024-02-12",
+      "questions": "Explain how you manage state in a React app.",
+      "roleOffered": null,
+      "compensationOffered": null,
+      "applicationId": 3
+    },
+    {
+      "roundNum": 2,
+      "roundType": "system design",
+      "interviewDate": "2024-02-18",
+      "questions": "Design a URL shortening service.",
+      "roleOffered": null,
+      "compensationOffered": null,
+      "applicationId": 4
+    },
+    {
+      "roundNum": 1,
+      "roundType": "behavioral",
+      "interviewDate": "2024-02-22",
+      "questions": "Tell us about a time you faced a difficult challenge at work.",
+      "roleOffered": null,
+      "compensationOffered": null,
+      "applicationId": 5
+    },
+    {
+      "roundNum": 2,
+      "roundType": "technical",
+      "interviewDate": "2024-02-25",
+      "questions": "How would you optimize a React app for performance?",
+      "roleOffered": null,
+      "compensationOffered": null,
+      "applicationId": 6
+    },
+    {
+      "roundNum": 3,
+      "roundType": "final",
+      "interviewDate": "2024-02-28",
+      "questions": "What are your expectations regarding career growth?",
+      "roleOffered": null,
+      "compensationOffered": null,
+      "applicationId": 7
+    },
+    {
+      "roundNum": 1,
+      "roundType": "telephonic",
+      "interviewDate": "2024-02-10",
+      "questions": "What is your experience with React?",
+      "roleOffered": null,
+      "compensationOffered": null,
+      "applicationId": 8
+    },
+    {
+      "roundNum": 2,
+      "roundType": "live coding",
+      "interviewDate": "2024-02-15",
+      "questions": "Solve a React problem live",
+      "roleOffered": null,
+      "compensationOffered": null,
+      "applicationId": 9
+    },
+    {
+      "roundNum": 1,
+      "roundType": "technical",
+      "interviewDate": "2024-02-12",
+      "questions": "Explain how you manage state in a React app.",
+      "roleOffered": null,
+      "compensationOffered": null,
+      "applicationId": 10
+    }
+  ]  
+}

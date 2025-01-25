@@ -10,16 +10,16 @@ app.use(express.json())
 // database connection
 connectDB();
 // Synchronize models with database
- const databaseSyncronization = async () => {
-    await sequelize.sync({ force: true })
-    .then(() => {
-        console.log("Database synchronized successfully.");
-    })
-    .catch((err) => {
-        console.error("Database synchronization failed:", err);
-    });
- }
- databaseSyncronization();
+//  const databaseSyncronization = async () => {
+//     await sequelize.sync({ force: true })
+//     .then(() => {
+//         console.log("Database synchronized successfully.");
+//     })
+//     .catch((err) => {
+//         console.error("Database synchronization failed:", err);
+//     });
+//  }
+//  databaseSyncronization();
 
 // mount route
 const createApplicationroute = require("./routes/createApplication");
@@ -51,7 +51,4 @@ app.use("/v1/api", getApplicationByStatusGroupRoute);
 
 
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Server is running on the port: ${PORT}`);
-});
+module.exports = { app }

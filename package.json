@@ -4,7 +4,10 @@
   "description": "Job Application Tracker is a web-based application that facilitates users to track and manage their job applications efficiently. The main purpose of this project is to enable users to easily organize their applied jobs, application status, and interview dates and manage their career in a structured way.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js",
+    "seed": "node database/seed.js",
+    "seed:test": "set NODE_ENV=test&& node database/seed_test.js",
+    "test": "set NODE_ENV=test&& jest --runInBand"
   },
   "repository": {
     "type": "git",
