@@ -157,6 +157,63 @@ describe("GET Retrieves Job Application API TEST", () => {
 
     });
 
+    it("/v1/api/applications/:id should return a Specific application by id", async () => {
+        const res = await request(app).get("/v1/api/applications/1");
+        expect(res.statusCode).toBe(200);
+        expect(res.body).toEqual(expect.objectContaining({
+            id: 1,
+            role: "Frontend Developer",
+            company: "Innovatech",
+            jdUrl: "https://innovatech.com/careers/frontend",
+            appliedAt: "2024-01-15T00:00:00.000Z",
+            status: "no reply",
+            interviewRounds: 0,
+        }));
+    });
+
+    it("/v1/api/applications/:id should Return 404 if job application is not found", async () => {
+        const res = await request(app).get("/v1/api/applications/54");
+        expect(res.statusCode).toBe(404);
+        expect(res.body.error).toEqual("Application not found.");
+    });
+
+    it("Put /v1/api/applications/:id should Update a job application successfully", async() => {
+        const response = await request(app).put("/v1/api/applications/1").send({
+            status: "interview",
+            interviewRounds: 1,
+        });
+        expect(response.statusCode).toEqual(200);
+        expect(response.body).toEqual(expect.objectContaining(
+            {
+                id: 1,
+                role: "Frontend Developer",
+                company: "Innovatech",
+                jdUrl: "https://innovatech.com/careers/frontend",
+                appliedAt: "2024-01-15T00:00:00.000Z",
+                status: "interview",
+                interviewRounds: 1,
+            }
+        ));
+    });
+
+    it("Put /v1/api/applications/:id should Return 404 if job application is not found for update", async() => {
+        const response = await request(app).put("/v1/api/applications/56").send({
+            status: "interview",
+            interviewRounds: 1,
+        });
+        expect(response.statusCode).toEqual(404);
+        expect(response.body.error).toEqual("Application not found.")
+    });
+
+    it("Put /v1/api/applications/:id should Return 400 if invalid data is provided", async() => {
+        const response = await request(app).put("/v1/api/applications/2").send({
+            status: "gshaj",
+            interviewRounds: 1,
+        });
+        expect(response.statusCode).toEqual(400);
+        expect(response.body.error).toEqual("Invalid status value.")
+    });
+
     it("/v1/api/applications should Return 200 OK with an empty array when no applications exist", async ()=> {
         await sequelize.query('PRAGMA foreign_keys = OFF;');
         await jobApplication.destroy({ where: {} });
@@ -167,4 +224,6 @@ describe("GET Retrieves Job Application API TEST", () => {
         expect(res.body).toEqual([]);
 
     });
+
+    
 });

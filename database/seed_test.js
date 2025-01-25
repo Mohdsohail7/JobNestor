@@ -19,6 +19,6 @@ const seedTestData = async () => {
         console.log("Error detecting from data seeding.", error.message );
     }
 }
-// seedTestData();
+ // seedTestData();
 
 module.exports = seedTestData;
