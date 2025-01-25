@@ -10,13 +10,16 @@ app.use(express.json())
 // database connection
 connectDB();
 // Synchronize models with database
- sequelize.sync({ force: true })
+ const databaseSyncronization = async () => {
+    await sequelize.sync({ force: true })
     .then(() => {
         console.log("Database synchronized successfully.");
     })
     .catch((err) => {
         console.error("Database synchronization failed:", err);
     });
+ }
+ databaseSyncronization();
 
 // mount route
 const createApplicationroute = require("./routes/createApplication");
@@ -27,6 +30,8 @@ const getApplicationByAppliedAt = require("./routes/fetchApplication");
 const getApplicationByIdRoute = require("./routes/fetchApplication");
 const updateJobApplicationRoute = require("./routes/createApplication");
 const deleteApplicationRoute = require("./routes/createApplication");
+const createInterviewRoute = require("./routes/interview");
+const getAllInterviewRoute = require("./routes/interview");
 
 // route
 app.use("/v1/api", createApplicationroute);
@@ -37,6 +42,8 @@ app.use("/v1/api", getApplicationByAppliedAt);
 app.use("/v1/api", getApplicationByIdRoute);
 app.use("/v1/api", updateJobApplicationRoute);
 app.use("/v1/api", deleteApplicationRoute);
+app.use("/v1/api", createInterviewRoute);
+app.use("/v1/api", getAllInterviewRoute);
 
 
 

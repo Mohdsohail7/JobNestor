@@ -11,7 +11,7 @@ const interviewModel = sequelize.define("interviewModel", {
     applicationId: {
         type: DataTypes.INTEGER,
         references: {
-            model: "jobApplication",
+            model: "jobApplications",
             key: "id"
         }
     },
