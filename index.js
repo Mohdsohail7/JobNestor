@@ -32,6 +32,8 @@ const updateJobApplicationRoute = require("./routes/createApplication");
 const deleteApplicationRoute = require("./routes/createApplication");
 const createInterviewRoute = require("./routes/interview");
 const getAllInterviewRoute = require("./routes/interview");
+const getReportTotalApplicationRoute = require("./routes/reportingAndSorting");
+const getApplicationByStatusGroupRoute = require("./routes/reportingAndSorting");
 
 // route
 app.use("/v1/api", createApplicationroute);
@@ -44,6 +46,8 @@ app.use("/v1/api", updateJobApplicationRoute);
 app.use("/v1/api", deleteApplicationRoute);
 app.use("/v1/api", createInterviewRoute);
 app.use("/v1/api", getAllInterviewRoute);
+app.use("/v1/api", getReportTotalApplicationRoute);
+app.use("/v1/api", getApplicationByStatusGroupRoute);
 
 
 
