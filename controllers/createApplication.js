@@ -1,3 +1,4 @@
+const interviewModel = require("../models/interviewModel");
 const jobApplication = require("../models/jobApplicationsModel");
 
 const createApplication = async (req, res) => {
@@ -61,11 +62,14 @@ const deleteApplicationByid = async (req, res) => {
         if (!findApplication) {
             return res.status(404).json({ error: "Application not found."});
         }
+        // before delete job application we need to delete related interview by this application i will delete this related interview manually because i did not add cascade in association
+        await interviewModel.destroy({ where: { applicationId: id } });
+        
         await findApplication.destroy();
         return res.status(204).send();
 
     } catch (error) {
-        return res.status(500).json({ error: "Internal Server Error.", error });
+        return res.status(500).json({ error: "Internal Server Error.",detaisl: error.message });
     }
 }
 

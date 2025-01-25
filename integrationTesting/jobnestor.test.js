@@ -214,6 +214,19 @@ describe("GET Retrieves Job Application API TEST", () => {
         expect(response.body.error).toEqual("Invalid status value.")
     });
 
+    it("Delete /v1/api/applications/:id should Delete a job application successfully", async() => {
+        const response = await request(app).delete("/v1/api/applications/6");
+        expect(response.statusCode).toEqual(204);
+        
+    });
+
+    it("Delete /v1/api/applications/:id should Return 404 if job application is not found for deletion", async() => {
+        const response = await request(app).delete("/v1/api/applications/65");
+        expect(response.statusCode).toEqual(404);
+        expect(response.body.error).toEqual("Application not found.")
+        
+    });
+
     it("/v1/api/applications should Return 200 OK with an empty array when no applications exist", async ()=> {
         await sequelize.query('PRAGMA foreign_keys = OFF;');
         await jobApplication.destroy({ where: {} });
