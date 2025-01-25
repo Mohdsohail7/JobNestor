@@ -1,6 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 const { connectDB, sequelize } = require("./database/init");
+const seedData = require("./database/seed");
+const seedTestData = require("./database/seed_test")
 const app = express();
 require("dotenv").config();
 
@@ -9,17 +11,12 @@ app.use(express.json())
 
 // database connection
 connectDB();
-// Synchronize models with database
-//  const databaseSyncronization = async () => {
-//     await sequelize.sync({ force: true })
-//     .then(() => {
-//         console.log("Database synchronized successfully.");
-//     })
-//     .catch((err) => {
-//         console.error("Database synchronization failed:", err);
-//     });
-//  }
-//  databaseSyncronization();
+// data seeding
+seedData();
+
+// test data
+seedTestData();
+
 
 // mount route
 const createApplicationroute = require("./routes/createApplication");
@@ -34,6 +31,7 @@ const createInterviewRoute = require("./routes/interview");
 const getAllInterviewRoute = require("./routes/interview");
 const getReportTotalApplicationRoute = require("./routes/reportingAndSorting");
 const getApplicationByStatusGroupRoute = require("./routes/reportingAndSorting");
+
 
 // route
 app.use("/v1/api", createApplicationroute);

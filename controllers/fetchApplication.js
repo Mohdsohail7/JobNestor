@@ -6,9 +6,9 @@ const getAllApplications = async (req, res) => {
     try {
         const result = await jobApplication.findAll();
         console.log("Fetched applications:", result);
-        if (!result || result.length === 0) {
-            return res.status(404).json({ error: "job application not found."});
-        }
+        // if (!result || result.length === 0) {
+        //     return res.status(404).json({ error: "job application not found."});
+        // }
         return res.status(200).json(result);
     } catch (error) {
         return res.status(500).json({ error: "Internal Server Error.", error });

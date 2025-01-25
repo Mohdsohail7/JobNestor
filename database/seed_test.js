@@ -14,9 +14,11 @@ const seedTestData = async () => {
         // seed interview data
         await interviewModel.bulkCreate(interviews);
 
-        console.log("Application data and interviews data seeded successfully.");
+        console.log("Application data and interviews test data seeded successfully.");
     } catch (error) {
         console.log("Error detecting from data seeding.", error.message );
     }
 }
-seedTestData();
+// seedTestData();
+
+module.exports = seedTestData;

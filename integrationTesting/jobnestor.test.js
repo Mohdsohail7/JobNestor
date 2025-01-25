@@ -2,14 +2,13 @@ const request = require("supertest");
 const {app} = require("../index");
 const { sequelize } = require("../database/init");
 const jobApplication = require("../models/jobApplicationsModel");
-const {applications, interviews} = require("../data.json");
 const interviewModel = require("../models/interviewModel");
+const seedTestData = require("../database/seed_test");
 
 
 beforeAll(async () => {
     await sequelize.sync({ force: true });
-    await jobApplication.bulkCreate(applications);
-    await interviewModel.bulkCreate(interviews);
+    await seedTestData();
 });
 
 afterAll(async () => {
@@ -42,4 +41,130 @@ describe("Create a Job Application API Test", () => {
         expect(response.statusCode).toBe(400);
         expect(response.body.error).toEqual("Role and company are required.");
     })
-})
+});
+
+
+describe("GET Retrieves Job Application API TEST", () => {
+    it("/v1/api/applications should return all job applications", async () => {
+        const res = await request(app).get("/v1/api/applications");
+
+        expect(res.statusCode).toBe(200);
+        expect(res.body.length).toBe(11);
+        const avoidTimeStamp = res.body.map(({ createdAt, updatedAt, ...rest}) => rest);
+        expect(avoidTimeStamp).toEqual(
+            [
+                {
+                    id: 1,
+                    role: "Frontend Developer",
+                    company: "Innovatech",
+                    jdUrl: "https://innovatech.com/careers/frontend",
+                    appliedAt: "2024-01-15T00:00:00.000Z",
+                    status: "no reply",
+                    interviewRounds: 0,
+                },
+                {
+                    id: 2,
+                    role: "Backend Engineer",
+                    company: "CodeWorks",
+                    jdUrl: "https://codeworks.com/jobs/backend",
+                    appliedAt: "2024-01-20T00:00:00.000Z",
+                    status: "no reply",
+                    interviewRounds: 1,
+                },
+                {
+                    id: 3,
+                    role: "Full Stack Developer",
+                    company: "DevSolutions",
+                    jdUrl: "https://devsolutions.com/jobs/fullstack",
+                    appliedAt: "2024-01-25T00:00:00.000Z",
+                    status: "interview",
+                    interviewRounds: 1,
+                },
+                {
+                    id: 4,
+                    role: "Data Analyst",
+                    company: "DataDive",
+                    jdUrl: "https://datadive.com/jobs/analyst",
+                    appliedAt: "2024-02-05T00:00:00.000Z",
+                    status: "no reply",
+                    interviewRounds: 0,
+                },
+                {
+                    id: 5,
+                    role: "Machine Learning Engineer",
+                    company: "AI Innovations",
+                    jdUrl: "https://aiinnovations.com/careers/ml",
+                    appliedAt: "2024-02-10T00:00:00.000Z",
+                    status: "rejected",
+                    interviewRounds: 2,
+                },
+                {
+                    id: 6,
+                    role: "Product Manager",
+                    company: "VisionaryTech",
+                    jdUrl: "https://visionarytech.com/careers/productmanager",
+                    appliedAt: "2024-01-28T00:00:00.000Z",
+                    status: "selected",
+                    interviewRounds: 3,
+                },
+                {
+                    id: 7,
+                    role: "DevOps Engineer",
+                    company: "CloudFlow",
+                    jdUrl: "https://cloudflow.com/jobs/devops",
+                    appliedAt: "2024-01-18T00:00:00.000Z",
+                    status: "interview",
+                    interviewRounds: 1,
+                },
+                {
+                    id: 8,
+                    role: "Cybersecurity Specialist",
+                    company: "SecureNet",
+                    jdUrl: "https://securenet.com/careers/cybersecurity",
+                    appliedAt: "2024-02-03T00:00:00.000Z",
+                    status: "no reply",
+                    interviewRounds: 0,
+                },
+                {
+                    id: 9,
+                    role: "UI/UX Designer",
+                    company: "CreativePixels",
+                    jdUrl: "https://creativepixels.com/jobs/uiux",
+                    appliedAt: "2024-02-08T00:00:00.000Z",
+                    status: "accepted",
+                    interviewRounds: 2,
+                },
+                {
+                    id: 10,
+                    role: "Technical Writer",
+                    company: "DocuCraft",
+                    jdUrl: "https://docucraft.com/jobs/technicalwriter",
+                    appliedAt: "2024-01-30T00:00:00.000Z",
+                    status: "rejected",
+                    interviewRounds: 1,
+                },
+                {
+                    id: 11,
+                    role: "Frontend Developer",
+                    company: "Innovatech",
+                    jdUrl: "https://innovatech.com/careers/frontend",
+                    appliedAt: "2024-01-15T00:00:00.000Z",
+                    status: "no reply",
+                    interviewRounds: 0,
+                }
+            ]
+        )
+
+    });
+
+    it("/v1/api/applications should Return 200 OK with an empty array when no applications exist", async ()=> {
+        await sequelize.query('PRAGMA foreign_keys = OFF;');
+        await jobApplication.destroy({ where: {} });
+        await sequelize.query('PRAGMA foreign_keys = ON;');
+        const res = await request(app).get("/v1/api/applications");
+
+        expect(res.statusCode).toBe(200);
+        expect(res.body).toEqual([]);
+
+    });
+});
