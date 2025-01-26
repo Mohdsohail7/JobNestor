@@ -288,6 +288,40 @@ describe("create interview round API TEST", () => {
 
 });
 
+describe("Retrieve All Interviews for an Application", () => {
+    it("GET /v1/api/applications/:id/interview should Retrieve all interview rounds for a job application", async () => {
+        const res = await request(app).get("/v1/api/applications/1/interview");
+
+        expect(res.statusCode).toBe(200);
+        // we need to use arrayContaining method because in response i got an array
+        expect(res.body).toEqual(expect.arrayContaining([
+            expect.objectContaining({
+                id: 1,
+                applicationId: 1,
+                roundNum: 1,
+                roundType: "telephonic",
+                interviewDate: "2024-02-10T00:00:00.000Z",
+                questions: "What is your experience with React?",
+                roleOffered: null,
+                compensationOffered: null,
+            }),
+        ]));
+
+        // each record have an createdAt AND updatedAt in array that's why we need to run loop
+        res.body.forEach((interview) => {
+            expect(interview).toHaveProperty("createdAt");
+            expect(interview).toHaveProperty("updatedAt");
+        });
+    });
+
+    it("GET /v1/api/applications/:id/interview should Return 404 if job application is not found", async () => {
+        const res = await request(app).get("/v1/api/applications/78/interview");
+
+        expect(res.statusCode).toBe(404);
+        expect(res.body.error).toEqual("Interiews not found by this job application.");
+    });
+})
+
 
 
 describe("GET job application API TEST", () => {
