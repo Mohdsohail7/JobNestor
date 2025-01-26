@@ -232,6 +232,64 @@ describe("Delete job application API TEST", () => {
 });
 
 
+describe("create interview round API TEST", () => {
+    it ("POST /v1/api/applications/:id/interview should create an interview round for job application", async () => {
+        const res = await request(app).post("/v1/api/applications/3/interview").send({
+            roundNum: 2,
+            roundType: "live coding",
+            interviewDate: "2024-02-15",
+            questions: "Solve a React problem live",
+            roleOffered: null,
+            compensationOffered: null,
+        });
+    
+        expect(res.statusCode).toBe(201);
+        expect(res.body).toEqual(expect.objectContaining({
+            id: 11,
+            applicationId: 3,
+            roundNum: 2,
+            roundType: "live coding",
+            interviewDate: "2024-02-15T00:00:00.000Z",
+            questions: "Solve a React problem live",
+            roleOffered: null,
+            compensationOffered: null,
+        }));
+        // we can also handle createdAt and updatedAt fields separately below like this
+        expect(res.body).toHaveProperty("createdAt");
+        expect(res.body).toHaveProperty("updatedAt");
+
+    });
+
+    it ("POST /v1/api/applications/:id/interview should Return 400 if required fields are missing", async () => {
+        const res = await request(app).post("/v1/api/applications/1/interview").send({
+            interviewDate: "2024-02-15",
+            questions: "Solve a React problem live",
+            roleOffered: null,
+            compensationOffered: null,
+        });
+    
+        expect(res.statusCode).toBe(400);
+        expect(res.body.error).toEqual("roundNum, roundType, and interviewDate are required.")
+    });
+
+    it ("POST /v1/api/applications/:id/interview should Return 404 if job application is not found for adding an interview", async () => {
+        const res = await request(app).post("/v1/api/applications/45/interview").send({
+            roundNum: 2,
+            roundType: "live coding",
+            interviewDate: "2024-02-15",
+            questions: "Solve a React problem live",
+            roleOffered: null,
+            compensationOffered: null,
+        });
+    
+        expect(res.statusCode).toBe(404);
+        expect(res.body.error).toEqual("Job Application not found.")
+    });
+
+});
+
+
+
 describe("GET job application API TEST", () => {
     it("/v1/api/applications should Return 200 OK with an empty array when no applications exist", async ()=> {
         await sequelize.query('PRAGMA foreign_keys = OFF;');
@@ -243,4 +301,4 @@ describe("GET job application API TEST", () => {
         expect(res.body).toEqual([]);
 
     });
-})
+});
