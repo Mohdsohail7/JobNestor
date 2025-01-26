@@ -320,6 +320,61 @@ describe("Retrieve All Interviews for an Application", () => {
         expect(res.statusCode).toBe(404);
         expect(res.body.error).toEqual("Interiews not found by this job application.");
     });
+});
+
+describe("API Tests for Filtering and Sorting GET /applications", () => {
+    it("GET /v1/api/applications?status=interview should return job applications with the specified status", async () => {
+        const response = await request(app).get("/v1/api/applications/status?status=interview");
+        expect(response.body).toEqual(expect.arrayContaining([
+            expect.objectContaining({
+                id: 3,
+                role: "Full Stack Developer",
+                company: "DevSolutions",
+                jdUrl: "https://devsolutions.com/jobs/fullstack",
+                appliedAt: "2024-01-25T00:00:00.000Z",
+                status: "interview",
+                interviewRounds: 1,
+            }),
+            expect.objectContaining({
+                id: 7,
+                role: "DevOps Engineer",
+                company: "CloudFlow",
+                jdUrl: "https://cloudflow.com/jobs/devops",
+                appliedAt: "2024-01-18T00:00:00.000Z", 
+                status: "interview",
+                interviewRounds: 1,
+            }),
+        ]));
+        response.body.forEach((jobApp) => {
+            expect(jobApp).toHaveProperty("createdAt");
+            expect(jobApp).toHaveProperty("updatedAt");
+        });
+    });
+
+    it("GET /v1/api/applications??company=Tech Corp should return job applications with the specified Company name", async () => {
+        const response = await request(app).get("/v1/api/applications/company?company=CodeWorks");
+        expect(response.body).toEqual(expect.arrayContaining([
+            expect.objectContaining({
+                id: 2,
+                role: "Backend Engineer",
+                company: "CodeWorks",
+                jdUrl: "https://codeworks.com/jobs/backend",
+                appliedAt: "2024-01-20T00:00:00.000Z",
+                status: "no reply",
+                interviewRounds: 1,
+            }),
+        ]));
+        response.body.forEach((jobApp) => {
+            expect(jobApp).toHaveProperty("createdAt");
+            expect(jobApp).toHaveProperty("updatedAt");
+        });
+    });
+
+    it("GET /v1/api/applications?status=interview should Return 200 OK with an empty array when no applications match the filter", async () => {
+        const response = await request(app).get("/v1/api/applications/status?status=no interview");
+        expect(response.statusCode).toBe(200);
+        expect(response.body).toEqual([]);
+    });
 })
 
 

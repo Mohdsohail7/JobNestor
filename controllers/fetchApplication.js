@@ -41,9 +41,9 @@ const getApplicationByStatus = async (req, res) => {
             return res.status(400).json({ error: "status is missing."});
         }
         const resultByStatus = await jobApplication.findAll({ where: { status }});
-        if (!resultByStatus || resultByStatus.length === 0) {
-            return res.status(404).json({ error: "Application not found by this status."});
-        }
+        // if (!resultByStatus || resultByStatus.length === 0) {
+        //     return res.status(404).json({ error: "Application not found by this status."});
+        // }
         return res.status(200).json(resultByStatus);
 
     } catch (error) {
