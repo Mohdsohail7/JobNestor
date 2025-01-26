@@ -375,9 +375,38 @@ describe("API Tests for Filtering and Sorting GET /applications", () => {
         expect(response.statusCode).toBe(200);
         expect(response.body).toEqual([]);
     });
-})
+});
 
+describe("API Tests for Generating Reports", () => {
+    it("GET /v1/api/reports/applications should generate a report of total applications in a time period", async () => {
+        const res = await request(app).get("/v1/api/reports/applications?from=2024-01-01&to=2024-01-31");
+        expect(res.statusCode).toBe(200);
+        expect(res.body).toBe(6);
+    });
 
+    it("GET /v1/api/reports/applications should generate a report of applications grouped by status", async () => {
+        const res = await request(app).get("/v1/api/reports/applications/status?status=interview");
+        expect(res.statusCode).toBe(200);
+        expect(res.body).toEqual([
+            {
+                status: "accepted",
+                count: 1,
+            },
+            {
+                status: "interview",
+                count: 3,
+            },
+            {
+                status: "no reply",
+                count: 4,
+            },
+            {
+                status: "rejected",
+                count: 2,
+            },
+        ]);
+    });
+});
 
 describe("GET job application API TEST", () => {
     it("/v1/api/applications should Return 200 OK with an empty array when no applications exist", async ()=> {
