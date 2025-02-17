@@ -2,7 +2,7 @@ JobNestor
 
 JobNestor is a job application tracking system that allows users to manage job applications, track interview progress, filter and sort applications, and generate reports.
 
-📌 Features
+## 📌 Features
 
 Create, read, update, and delete job applications.
 
@@ -35,7 +35,7 @@ Generate reports based on application data.
   sqlite3,
   supertest,
 
-🚀 How to Set Up for this project ?
+## 🚀 How to Set Up for this project ?
 
 1️⃣ Clone the project Repository
 ``` sh
@@ -72,9 +72,10 @@ npm test
 
 ### API Endpoints
 
-### *** Create Job Application
+### Create Job Application
 
 Endpoint: POST /v1/api/applications
+
 Request:
 ``` sh
 {
@@ -87,6 +88,7 @@ Request:
 
 Response:
 
+``` sh 
 {
   "id": 1,
   "company": "Google",
@@ -94,23 +96,28 @@ Response:
   "status": "applied",
   "appliedDate": "2025-02-17"
 }
+```
 
-Validation:
+**Validation:**
 - role and company are required fields.
+
 - appliedAt is optional; if not provided, it defaults to the current date.
+
 Error Handling (400):
+
 - If the required fields are missing, return a 400 Bad Request error:
+``` sh
 {
   'error': 'Role and company are required.'
 }
-
+```
 
 ### Get All Job Applications
 ``` sh
 Endpoint: GET /v1/api/applications
 ``` 
 Response:
-
+```sh
 [
   {
     "id": 1,
@@ -121,6 +128,7 @@ Response:
   },
   ....
 ]
+```
 
 ### Update Job Application
 ``` sh
@@ -133,27 +141,29 @@ Request:
 }
 ```
 Response:
-
+``` sh
 {
   "message": "Application updated successfully."
 }
+```
 
 ### Delete Job Application
 
 Endpoint: DELETE /v1/api/applications/:id
 
 Response:
-
+``` sh
 {
   "message": "Application deleted successfully."
 }
+```
 
 ### Get Reports
 
 Endpoint: GET /reports/v1/api/applications?from=2024-01-01&to=2024-01-20
 
 Response:
-
+```sh
 [
     {
         "id": 1,
@@ -221,13 +231,17 @@ Response:
         "createdAt": "2025-02-17T10:04:29.746Z",
         "updatedAt": "2025-02-17T10:04:29.746Z"
     }
-]
+] 
+```
 
 ### Get job by specific id
 
 Endpoint: GET /v1/api/applications/:id
+
 if id match then
+
 response
+``` sh
 {
     "id": 2,
     "role": "Backend Engineer",
@@ -239,17 +253,26 @@ response
     "createdAt": "2025-02-17T10:04:29.716Z",
     "updatedAt": "2025-02-17T10:04:29.716Z"
 }
+```
+
 
 Endpoint: GET /v1/api/applications/:id
+
 if id not match then
+
 response
+``` sh
 {
     "error": "Application not found."
 }
+```
 
 ### Update job by specific id
+
 Endpoint: GET /v1/api/applications/:id
+
 Update an existing job application.
+
 Request
 ``` sh
 {
@@ -273,36 +296,44 @@ Response
 Error Handling (400):
 
 - Return a 400 Bad Request if the status value is invalid:
-
+``` sh
 {
   'error': 'Invalid status value.'
 }
+```
 
 Error Handling (404):
 
 - Return a 404 Not Found if the application doesn’t exist:
-
+``` sh
 {
   'error': 'Application not found.'
 }
-
+```
 
 ### Delete Job by id
+
 Endpoint: GET /v1/api/applications/:id
+
 Delete an application.
 
 Response (Success 204):
+
 - Return 204 No Content on successful deletion.
 
 Error Handling (404):
 - Return a 404 Not Found if the application doesn’t exist:
+``` sh
 {
   'error': 'Application not found.'
 }
+```
 
 ### *** create a interview for specific job application
+
 Endpoint: POST /v1/api/applications/:id/interview
-Request
+
+Request:
 ``` sh
 {
     "roundNum": 3,
@@ -314,6 +345,7 @@ Request
   }
   ```
   Response
+  ``` sh
   {
     "id": 1,
     "applicationId": 2,
@@ -324,18 +356,26 @@ Request
     "roleOffered": "DevOps Engineer",
     "compensationOffered": "$110,000/year"
   }
+  ```
+
   ## Validation:
 - roundNum, roundType, and interviewDate are required fields.
+
 Error Handling (400):
 
 - If required fields are missing, return a 400 Bad Request:
+``` sh
 {
   'error': 'Interview round number, type, and date are required.'
 }
+```
 
 ### Retrieve all interview rounds for a specific application.
+
 Endpoint: GET /applications/:id/interview
+
 Response
+``` sh
 [
     {
         "id": 1,
@@ -362,18 +402,28 @@ Response
         "updatedAt": "2025-02-17T10:04:29.785Z"
     }
 ]
+``` 
 
 ### Reporting and Sorting
- Reporting Endpoints
+
+ Reporting Endpoints:
+
 Add reporting features for analyzing applications:
+
 Endpoint: GET /reports/applications
+
 Return the total number of applications submitted within a specific time period (e.g., ?from=2024-01-01&to=2024-01-31).
+
 Response
+
 12
 
  Return the total number of applications by status (e.g., how many interviews, selected, or rejected).
+
  Endpoint: GET /reports/applications/status
- Response
+
+ Response:
+ ``` sh
  [
     {
         "status": "accepted",
@@ -396,55 +446,55 @@ Response
         "count": 2
     }
 ]
-
+``` 
 
 ### Screenshots of the projects
 
 ### Create a new job application.
-![Job](screenshots/1.png)
+![Job](screenshots/1.PNG)
 
 ### Error Handling (400): in create job
-![Job](screenshots/2.png)
+![Job](screenshots/2.PNG)
 
 ### Retrieve all job applications
-![Job](screenshots/3.png)
+![Job](screenshots/3.PNG)
 
 ### Retrieve job by filter
-![Job](screenshots/4.png)
-![Job](screenshots/5.png)
-![Job](screenshots/6.png)
-![Job](screenshots/7.png)
-![Job](screenshots/8.png)
+![Job](screenshots/4.PNG)
+![Job](screenshots/5.PNG)
+![Job](screenshots/6.PNG)
+![Job](screenshots/7.PNG)
+![Job](screenshots/8.PNG)
 
 ### Retrieve job by id
-![Job](screenshots/9.png)
-![Job](screenshots/10.png)
+![Job](screenshots/9.PNG)
+![Job](screenshots/10.PNG)
 
 ### Update an existing job application.
-![UpdatedJob](screenshots/11.png)
-![UpdatedJobError](screenshots/12.png)
-![job not found](screenshots/13.png)
+![UpdatedJob](screenshots/11.PNG)
+![UpdatedJobError](screenshots/12.PNG)
+![job not found](screenshots/13.PNG)
 
 ### Delete an application.
-![DeletedJob](screenshots/14.png)
-![JobError](screenshots/15.png)
+![DeletedJob](screenshots/14.PNG)
+![JobError](screenshots/15.PNG)
 
 ### Create a interview round for specific job
-![Interview](screenshots/16.png)
+![Interview](screenshots/16.PNG)
 ### ** Validation:
-![Interview](screenshots/17.png)
+![Interview](screenshots/17.PNG)
 
 ### Retrieve all interview rounds for a specific application.
-![Interview](screenshots/18.png)
+![Interview](screenshots/18.PNG)
 
 ### Reporing and Sorting
-![Report](screenshots/19.png)
+![Report](screenshots/19.PNG)
 ### ** Validation:
-![Report](screenshots/20.png)
-![Sorting](screenshots/21.png)
+![Report](screenshots/20.PNG)
+![Sorting](screenshots/21.PNG)
 
 ### Test Suits
-![Test](screenshots/22.png)
+![Test](screenshots/22.PNG)
 
 
 
