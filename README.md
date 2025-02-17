@@ -1,4 +1,4 @@
-JobNestor
+### JobNestor
 
 JobNestor is a job application tracking system that allows users to manage job applications, track interview progress, filter and sort applications, and generate reports.
 
@@ -329,7 +329,7 @@ Error Handling (404):
 }
 ```
 
-### *** create a interview for specific job application
+###  create an interview for specific job application
 
 Endpoint: POST /v1/api/applications/:id/interview
 
