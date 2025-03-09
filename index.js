@@ -47,6 +47,9 @@ app.use("/v1/api", getAllInterviewRoute);
 app.use("/v1/api", getReportTotalApplicationRoute);
 app.use("/v1/api", getApplicationByStatusGroupRoute);
 
-
+// welcome route
+app.get("/", (req, res) => {
+    res.send(`<h3>Welcome our JobNestor application</h3>`);
+});
 
 module.exports = { app }
